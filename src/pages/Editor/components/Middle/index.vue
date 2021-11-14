@@ -7,12 +7,9 @@
 <script lang="ts" setup>
 import { ViewRender } from '@/core/index'
 import schemaMap from '@/materials/schema'
-
-const componentArray = [
-  schemaMap.ImageRange.config,
-  schemaMap.ImageRange.config
-
-]
+import { useStore } from 'vuex'
+const store = useStore()
+const { componentArray } = store.state
 </script>
 
 <style lang="less" scoped>
