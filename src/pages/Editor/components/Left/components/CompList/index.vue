@@ -1,6 +1,5 @@
 <template>
 	<div class="compContain">
-          <DynamicEngine />
 		<div class="panelTitle">组件列表</div>
 		<div class="penelBox">
 			<div
@@ -19,7 +18,7 @@
             fontSize: '30px'
 					}"
 				>
-					<!-- <PictureOutlined /> -->
+					<PictureOutlined />
 				</div>
 				<div
 					:style="{
@@ -40,9 +39,7 @@
 import schemaMap from '@/materials/schema'
 import basicTemplate from '@/materials/base/template'
 import { PictureOutlined } from '@ant-design/icons-vue'
-import DynamicEngine from '@/core/DynamicEngine';
 
-console.log(DynamicEngine)
 </script>
 
 <style lang="less" scoped>

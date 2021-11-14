@@ -1,24 +1,31 @@
 <template>
 	<div class="editorPanel">
-		<ViewRender />
+		<ViewRender :pointData="componentArray" />
 	</div>
 </template>
 
 <script lang="ts" setup>
-import { ViewRender } from '../../../../core/index';
+import { ViewRender } from '@/core/index'
+import schemaMap from '@/materials/schema'
+
+const componentArray = [
+  schemaMap.ImageRange.config,
+  schemaMap.ImageRange.config
+
+]
 </script>
 
 <style lang="less" scoped>
 .editorPanel {
-  position: relative;
-  flex: auto;
-  height: 100vh;
-  padding-bottom: 100px;
-  overflow-x: hidden;
+	position: relative;
+	flex: auto;
+	height: 100vh;
+	padding-bottom: 100px;
+	overflow-x: hidden;
 	background-color: #f0f2f5;
 }
 
 ::-webkit-scrollbar {
-  display: none; /* Chrome Safari */
+	display: none; /* Chrome Safari */
 }
 </style>
