@@ -15,6 +15,7 @@
     "lodash": "^4.17.21",
     "vue": "^3.2.16",
     "vue-router": "^4.0.12",
+    "vuedraggable": "^4.1.0",
     "vuex": "^4.0.2"
   },
   "devDependencies": {

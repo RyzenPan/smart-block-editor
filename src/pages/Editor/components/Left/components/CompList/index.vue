@@ -2,36 +2,28 @@
 	<div class="compContain">
 		<div class="panelTitle">组件列表</div>
 		<div class="penelBox">
-			<div
-				:className="`module ${(index + 1) % 3 === 0 ? 'mr0' : ''}`"
-				v-for="(item, index) in basicTemplate"
-				:key="index"
-				@click="addPoint(item)"
+			<draggable
+				:list="basicTemplate"
+        :group="{ name: 'people', pull: 'clone', put: false }"
+				@start="drag = true"
+				:clone="cloneComponent"
+				item-key="index"
+				@change="log"
 			>
-				<div
-					:style="{
-						height: '50px',
-						display: 'flex',
-						justifyContent: 'center',
-						alignItems: 'center',
-						flexDirection: 'column',
-						overflow: 'hidden',
-						fontSize: '30px',
-					}"
-				>
-					<PictureOutlined />
-				</div>
-				<div
-					:style="{
-						height: '30px',
-						lineHeight: '30px',
-						textAlign: 'center',
-						color: 'rgba(118, 118, 118, 1)',
-					}"
-				>
-					{{ item.displayName }}
-				</div>
-			</div>
+				<template #item="{ element, index }">
+					<div
+						:className="`module ${(index + 1) % 3 === 0 ? 'mr0' : ''}`"
+						@click="addPoint(element)"
+					>
+						<div class="comp-icon">
+							<PictureOutlined />
+						</div>
+						<div class="comp-title">
+							{{ element.displayName }}
+						</div>
+					</div>
+				</template>
+			</draggable>
 		</div>
 	</div>
 </template>
@@ -40,16 +32,38 @@
 import schemaMap from '@/materials/schema'
 import basicTemplate from '@/materials/base/template'
 import { PictureOutlined } from '@ant-design/icons-vue'
-import _ from 'lodash'
-import { uuid } from '@/utlis'
 import { useStore } from 'vuex'
+import { TNewData } from '../../../../../../store/typing'
+import draggable from 'vuedraggable'
+import { ref } from '@vue/reactivity'
 const store = useStore()
 
-const addPoint = item => {
-	const commonConfig = _.cloneDeep(schemaMap[item.type]?.config)
-	commonConfig.id = uuid(6, 10)
-	store.commit('addPointData', commonConfig)
+const addPoint = (item: TNewData) => {
+	store.commit('addPointData', item)
 }
+
+const handleDragstart = (index: number, event: any) => {
+	console.log(index, event)
+	event.dataTransfer?.setData('index', index.toString())
+}
+
+const log = e => {
+	console.log(e, 'log')
+}
+
+const cloneComponent = origin => {
+	console.log(origin, 'eeee')
+	return origin;
+	// drag.value = false
+	// const element = e.item._underlying_vm_
+	// if (element === undefined) {
+	// 	return
+	// }
+	// store.commit('addPointData', element)
+	// console.log(element)
+}
+
+let drag = ref(false)
 </script>
 
 <style lang="less" scoped>
@@ -107,7 +121,25 @@ const addPoint = item => {
 		content: '';
 	}
 }
+
 .mr0 {
 	margin-right: 0;
+}
+
+.comp-icon {
+	height: 50px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	overflow: hidden;
+	font-size: 30px;
+}
+
+.comp-title {
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	color: rgba(118, 118, 118, 1);
 }
 </style>
