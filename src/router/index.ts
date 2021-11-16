@@ -11,6 +11,11 @@ const routes = [
 		name: 'Editor',
 		component: Editor,
 	},
+	{
+		path: '/preview',
+		name: 'Preview',
+		component: () => import('../pages/Preview/index.vue'),
+	},
 ]
 
 const router = createRouter({

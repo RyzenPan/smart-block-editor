@@ -3,12 +3,11 @@
 		<div class="panelTitle">组件列表</div>
 		<div class="penelBox">
 			<draggable
-				:list="basicTemplate"
-        :group="{ name: 'people', pull: 'clone', put: false }"
-				@start="drag = true"
+				class="dragArea list-group"
+				:list="list"
+				:group="{ name: 'Droppable', pull: 'clone', put: false }"
+				item-key="name"
 				:clone="cloneComponent"
-				item-key="index"
-				@change="log"
 			>
 				<template #item="{ element, index }">
 					<div
@@ -33,37 +32,32 @@ import schemaMap from '@/materials/schema'
 import basicTemplate from '@/materials/base/template'
 import { PictureOutlined } from '@ant-design/icons-vue'
 import { useStore } from 'vuex'
-import { TNewData } from '../../../../../../store/typing'
-import draggable from 'vuedraggable'
+import { TNewData } from '@/store/typing'
+import draggable from '@/libs/vuedraggable'
 import { ref } from '@vue/reactivity'
+import { uuid } from '@/utlis'
+import _ from 'lodash'
 const store = useStore()
+
+let drag = ref(false)
+const list = ref(
+	basicTemplate.map((item: any) => {
+		return {
+			...item,
+			...schemaMap[item.type].config,
+		}
+	})
+)
 
 const addPoint = (item: TNewData) => {
 	store.commit('addPointData', item)
 }
 
-const handleDragstart = (index: number, event: any) => {
-	console.log(index, event)
-	event.dataTransfer?.setData('index', index.toString())
+const cloneComponent = (origin: any) => {
+	const clone = _.cloneDeep(origin)
+	clone.id = uuid(6, 10)
+	return clone
 }
-
-const log = e => {
-	console.log(e, 'log')
-}
-
-const cloneComponent = origin => {
-	console.log(origin, 'eeee')
-	return origin;
-	// drag.value = false
-	// const element = e.item._underlying_vm_
-	// if (element === undefined) {
-	// 	return
-	// }
-	// store.commit('addPointData', element)
-	// console.log(element)
-}
-
-let drag = ref(false)
 </script>
 
 <style lang="less" scoped>
