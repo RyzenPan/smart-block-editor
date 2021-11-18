@@ -1,18 +1,86 @@
 <template>
-  <div>
-    <GridRender :pointData="pointData"/>
-  </div>
+	<div class="canvas">
+		<draggable
+			class="droppablePanel"
+			:list="pointList"
+			@change="handleChangeCanvas"
+			tag="transition-group"
+			item-key="id"
+			:component-data="{
+				tag: 'div',
+				type: 'transition-group',
+				name: !drag ? 'flip-list' : null,
+			}"
+			v-bind="{
+				animation: 300,
+				group: 'Droppable',
+        disabled: false,
+				ghostClass: 'ghost',
+			}"
+			@start="drag = true"
+			@end="drag = false"
+		>
+			<template #item="{ element }">
+				<DynamicEngine :renderItem="element" />
+			</template>
+		</draggable>
+	</div>
 </template>
 
 <script lang="ts" setup>
-import GridRender from './components/GridRender/index.vue'
-import { defineProps } from 'vue'
+import DynamicEngine from '@/core/DynamicEngine.vue'
+import _ from 'lodash'
+import { computed, ref } from 'vue'
+import { useStore } from 'vuex'
+import draggable from '../../libs/vuedraggable'
 
-const { pointData } = defineProps({
-  pointData: Array
+const store = useStore()
+// 拖拽插件配置
+let drag = ref(false)
+const dragOptions = computed(() => {
+	return {
+		animation: 300,
+		group: 'Droppable',
+		disabled: false,
+		ghostClass: 'ghost',
+	}
 })
+
+// 从VueX中直接取出画板数据
+const pointList = computed(() => store.state.componentArray)
+
+const handleChangeCanvas = (e: any) => {
+	console.log(e, 'handleChangeCanvas', pointList.value)
+	store.commit('setPointData', pointList.value)
+}
 </script>
 
-<style>
+<style lang="less" scoped>
+.canvas {
+	position: relative;
+	z-index: 2;
+	width: 375px;
+	min-height: 665px;
+	margin: 150px auto 50px;
+	overflow: visible;
+	background-color: #fff;
+	border-radius: 10px;
+	box-shadow: 0 0 6px rgba(152, 153, 161, 0.3);
+}
 
+.droppablePanel {
+	width: 100%;
+	min-height: 665px;
+}
+:global(.react-draggable-dragging) {
+	z-index: 99;
+}
+.sortable-ghost {
+	opacity: 0.5;
+	background: #c8ebfb;
+}
+.ghost {
+	opacity: 0.5;
+	background: #c8ebfb;
+}
 </style>

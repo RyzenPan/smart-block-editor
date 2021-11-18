@@ -232,8 +232,8 @@ const draggableComponent = defineComponent({
 		},
 
 		onDragStart(evt) {
-			this.context = this.getUnderlyingVm(evt.item)
-			evt.item._underlying_vm_ = this.clone(this.context.element)
+			this.context = this.getUnderlyingVm(evt.item) || {}
+			evt.item._underlying_vm_ = this.clone(this.context.element || {})
 			draggingElement = evt.item
 		},
 

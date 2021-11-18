@@ -14,25 +14,25 @@ export default createStore({
 		currentCompontent: {},
 	},
 	getters: {
-		componentArray() {
-			return
+		getComponentArray(state) {
+			console.log(state, 'state')
+			return state.componentArray
 		},
 	},
 	mutations: {
-		addPointData({ componentArray }: any, item: TNewData) {
+		addPointData(state, item: TNewData) {
 			const commonConfig = _.cloneDeep(schemaMap[item.type]?.config)
 			commonConfig.id = uuid(6, 10)
-			componentArray.push(commonConfig)
+			state.componentArray.push(commonConfig)
 		},
-		addPointDataForIndex({ componentArray }: any, { item, index }) {
-			const commonConfig = _.cloneDeep(schemaMap[item.type]?.config)
-			commonConfig.id = uuid(6, 10)
-			componentArray.splice(index, 0, commonConfig)
+		setPointData(state, newCompArray) {
+			state.componentArray = newCompArray
+			localStorage.setItem('ZHIDA_TEMP_DATA', JSON.stringify(newCompArray))
 		},
-		setPointData({ componentArray }: any, newCompArray) {
-			componentArray = newCompArray
-			localStorage.setItem('ZHIDA_TEMP_DATA', JSON.stringify(componentArray))
-		},
+		clearPointData(state) {
+			state.componentArray = []
+			localStorage.setItem('ZHIDA_TEMP_DATA', JSON.stringify(state.componentArray))
+		}
 	},
 	actions: {},
 	modules: {},
