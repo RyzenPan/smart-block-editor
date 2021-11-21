@@ -14,14 +14,21 @@
 			v-bind="{
 				animation: 300,
 				group: 'Droppable',
-        disabled: false,
+				disabled: false,
 				ghostClass: 'ghost',
 			}"
 			@start="drag = true"
 			@end="drag = false"
 		>
 			<template #item="{ element }">
-				<DynamicEngine :renderItem="element" />
+				<div
+					:class="`dragItem ${
+						currentCompontent.id === element.id ? 'active' : ''
+					}`"
+					@click="handleSelectComp(element.id)"
+				>
+					<DynamicEngine :renderItem="element" />
+				</div>
 			</template>
 		</draggable>
 	</div>
@@ -49,9 +56,17 @@ const dragOptions = computed(() => {
 // 从VueX中直接取出画板数据
 const pointList = computed(() => store.state.componentArray)
 
-const handleChangeCanvas = (e: any) => {
-	console.log(e, 'handleChangeCanvas', pointList.value)
+// 更新画板数据
+const handleChangeCanvas = () => {
 	store.commit('setPointData', pointList.value)
+}
+
+// 当前选中的组件
+const currentCompontent = computed(() => store.state.currentCompontent)
+
+// 选中组件
+const handleSelectComp = (id: string) => {
+	store.commit('modCurrPointData', id)
 }
 </script>
 
@@ -82,5 +97,24 @@ const handleChangeCanvas = (e: any) => {
 .ghost {
 	opacity: 0.5;
 	background: #c8ebfb;
+}
+.dragItem {
+  position: relative;
+	box-sizing: border-box;
+	cursor: move;
+	&.active::after {
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 9;
+		box-sizing: border-box;
+		width: 100%;
+		height: 100%;
+		// border: 3px dashed rgba(122,187,248,.7);
+		border: 2px dashed rgb(60, 68, 249);
+		box-shadow: 0 0 4px 4px rgb(122 187 248 / 20%);
+		content: '';
+		pointer-events: none;
+	}
 }
 </style>
