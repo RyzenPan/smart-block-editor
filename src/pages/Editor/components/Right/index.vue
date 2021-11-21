@@ -4,14 +4,24 @@
 			class="attrSetting"
 			:style="{
 				transition: 'all ease-in-out 0.5s',
-				transform: rightColla ? 'translate(110%,0)' : 'translate(0,0)',
+				transform: !currentCompontent.id
+					? 'translate(110%,0)'
+					: 'translate(0,0)',
 			}"
 		>
-			<div class="tit">属性面板</div>
+			<div class="tit">
+				<div class="left">属性面板</div>
+				<div class="right" @click="handleClosePanel">
+					<CloseOutlined />
+				</div>
+			</div>
+			<div class="config-content">
+				{{currentCompontent.displayName + ': ' + currentCompontent.id}}
+			</div>
 		</div>
 		<div
 			:style="{
-				width: rightColla ? 0 : '496px',
+				width: !currentCompontent.id ? 0 : '496px',
 				transition: 'all ease-in-out 0.4s',
 			}"
 		></div>
@@ -19,13 +29,23 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from '@vue/reactivity'
+import { computed, ref } from 'vue'
+import { useStore } from 'vuex'
+import { TNewData } from '../../../../store/typing'
+// 导入图标库
+import { CloseOutlined } from "@ant-design/icons-vue";
+const store = useStore()
 
 let rightColla = ref(true)
-setTimeout(() => {
-  rightColla.value = false
-}, 300);
 
+// 当前选中的组件
+const currentCompontent: TNewData | {} = computed(
+	() => store.state.currentCompontent
+)
+
+const handleClosePanel = () => {
+	store.commit('clearCurrPointData')
+}
 </script>
 
 <style lang="less" scoped>

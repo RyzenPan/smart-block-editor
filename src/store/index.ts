@@ -36,6 +36,10 @@ export default createStore({
 			const currentItem = state.componentArray.find((i: TNewData) => i.id === currentId)
 			state.currentCompontent = currentItem
 		},
+		// 清除选中的当前组件
+		clearCurrPointData(state) {
+			state.currentCompontent = {}
+		},
 	},
 	actions: {},
 	modules: {},
