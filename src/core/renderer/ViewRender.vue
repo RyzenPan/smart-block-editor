@@ -39,7 +39,7 @@ import DynamicEngine from '@/core/DynamicEngine.vue'
 import _ from 'lodash'
 import { computed, ref, toRaw } from 'vue'
 import { useStore } from 'vuex'
-import draggable from '../../libs/vuedraggable'
+import draggable from '../../libs/vuedraggable/index'
 
 const store = useStore()
 // 拖拽插件配置

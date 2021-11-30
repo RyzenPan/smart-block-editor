@@ -26,3 +26,12 @@ export function uuid(len: number, radix: number) {
 
   return uuid.join('');
 }
+
+// 是否处在编辑器中
+export const isEditorMode = () => {
+  const query = window?.location?.href;
+  if (typeof query === 'string' && query.indexOf('editor') !== -1) {
+    return true;
+  }
+  return false;
+};

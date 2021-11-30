@@ -1,10 +1,11 @@
 <template>
-  <div class="emptyComp">- {{ props.compName }} -</div>
+  <div class="emptyComp" v-if="isEditorMode()">- {{ props.compName }} -</div>
 </template>
 
 <script lang="ts" setup>
+import { isEditorMode } from '../utlis'
 const props = defineProps({
-  compName: Object,
+  compName: String,
 });
 </script>
 

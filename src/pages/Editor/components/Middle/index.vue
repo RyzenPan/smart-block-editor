@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ViewRender } from '@/core/index'
+import ViewRender from '../../../../core/renderer/ViewRender.vue'
 import schemaMap from '@/materials/schema'
 import { useStore } from 'vuex'
 const store = useStore()
