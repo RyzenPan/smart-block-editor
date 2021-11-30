@@ -12,7 +12,7 @@ import { watch, ref } from "vue";
 const props = defineProps({
   renderItem: Object,
 });
-let title = ref(props?.renderItem?.data.title || '');
+let title = ref(props?.renderItem?.data.title || "");
 
 watch(
   () => props.renderItem,
