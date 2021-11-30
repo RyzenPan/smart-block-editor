@@ -1,6 +1,6 @@
 <template>
   <div class="Text">
-    <p class="title" v-if="title">{{ title }}</p>
+    <div class="title" :style="customStyle" v-if="textData.title">{{ textData.title }}</div>
     <EmptyComp compName="文字组件占位" v-else/>
   </div>
 </template>
@@ -8,16 +8,19 @@
 
 <script lang="ts" setup>
 import { watch, ref } from "vue";
+import { getCustomStyle } from "../../../utlis";
 
 const props = defineProps({
   renderItem: Object,
 });
-let title = ref(props?.renderItem?.data.title || "");
+let textData = ref(props?.renderItem?.data || {});
+let customStyle = ref(getCustomStyle(props?.renderItem?.data || {}))
 
 watch(
   () => props.renderItem,
   (newVal: any) => {
-    title.value = newVal.data.title;
+    textData.value = newVal.data;
+    customStyle.value = getCustomStyle(newVal.data)
   }
 );
 </script>

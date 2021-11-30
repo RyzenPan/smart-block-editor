@@ -35,3 +35,47 @@ export const isEditorMode = () => {
   }
   return false;
 };
+
+// 转换内联样式像素
+const vw = window.innerWidth;
+export const pxTransform = (size: number, designWidth = 375) => {
+  const multiply = designWidth / vw;
+  return isEditorMode() ? size : `${(size / multiply).toFixed(2)}`;
+};
+
+// 获取用户自定义样式
+export const getCustomStyle = (data: any) => {
+  let customStyleStr = ''
+  Object.keys(data).forEach((key: string) => {
+    const value = data[key];
+    switch (key) {
+      case 'textColor':
+        customStyleStr += `color: ${value};`;
+        break;
+      case 'fontSize':
+        customStyleStr += `font-size: ${pxTransform(value)}px;`;
+        break;
+      case 'textAlign':
+        customStyleStr += `text-align: ${value};`;
+        break;
+      case 'lineHeight':
+        customStyleStr += `line-height: ${pxTransform(value)}px;`;
+        break;
+      case 'fontWeight':
+        customStyleStr += `font-weight: ${value};`;
+        break;
+      case 'bgColor':
+        customStyleStr += `background: ${value};`;
+        break;
+      case 'bgRadius':
+        customStyleStr += `border-radius: ${value}px;`;
+        break;
+      case 'space':
+        customStyleStr += `padding: ${value}px;`;
+        break;
+      default:
+        break;
+    }
+  })
+  return customStyleStr;
+}
