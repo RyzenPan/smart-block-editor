@@ -71,7 +71,7 @@ const cloneComponent = (origin: any) => {
     user-select: none;
   }
   .penelBox {
-    height: 38.4vh;
+	  height: calc(100vh - 112px);
     padding: 10px 16px;
     overflow-x: hidden;
     overflow-y: scroll;
@@ -81,7 +81,6 @@ const cloneComponent = (origin: any) => {
     }
     .dragArea {
       display: flex;
-      cursor: move;
     }
   }
 }
@@ -96,6 +95,7 @@ const cloneComponent = (origin: any) => {
   border-radius: 8px;
   box-shadow: 0 0 6px rgba(152, 153, 161, 0.2);
   user-select: none;
+  cursor: move;
   &:hover {
     background-color: #e9ebed;
   }

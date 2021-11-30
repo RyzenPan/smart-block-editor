@@ -3,7 +3,7 @@
 		<div class="editComponentLeft">
 			<div class="penel">
         <CompList />
-        <CompMap />
+        <!-- <CompMap /> -->
       </div>
 		</div>
 		<div style="width: 350px; transition: all ease-in-out 0.5s"></div>
@@ -12,7 +12,7 @@
 
 <script lang="ts" setup>
 import CompList from './components/CompList/index.vue'
-import CompMap from './components/CompMap/index.vue'
+// import CompMap from './components/CompMap/index.vue'
 
 
 
