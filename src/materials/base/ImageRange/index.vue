@@ -1,16 +1,14 @@
 <template>
 	<div class="ImageRange">
 		<img
-			v-if="!imageLists.length"
+			v-if="!imageSrc"
 			src="https://img.wenhairu.com/images/2021/11/14/1zVhU.jpg"
 			alt=""
 			draggable="false"
 			:style="{ width: '100%' }"
 		/>
 		<img
-			v-for="(img, index) in imageLists"
-			:key="index"
-			:src="img.url"
+			:src="imageSrc"
 			alt=""
 			draggable="false"
 			:style="{ width: '100%' }"
@@ -19,14 +17,21 @@
 </template>
 
 <script lang="ts" setup>
+import { ref, watch } from "vue";
 
-const { renderItem } = defineProps({
+const props = defineProps({
 	renderItem: Object,
 })
 
-const { imageLists = [] } = renderItem?.data
+let imageSrc = ref(props?.renderItem?.data.imageSrc || '');
 
-// console.log(renderItem, '图片组件收到的')
+watch(
+  () => props.renderItem,
+  (newVal: any) => {
+    imageSrc.value = newVal.data.imageSrc;
+  }
+);
+
 </script>
 
 <style lang="less" scope>

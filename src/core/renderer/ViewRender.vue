@@ -54,7 +54,7 @@ const dragOptions = computed(() => {
 })
 
 // 从VueX中直接取出画板数据
-const pointList = computed(() => toRaw(store.state.componentArray))
+const pointList = computed(() => store.state.componentArray)
 
 // 更新画板数据
 const handleChangeCanvas = () => {

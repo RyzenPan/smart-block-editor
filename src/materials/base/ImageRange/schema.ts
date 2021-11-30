@@ -6,15 +6,15 @@ const ImageRange = {
 		...template,
 		id: uuid(6, 10),
 		data: {
-			imageLists: [],
+			imageSrc: '',
 		},
 	},
 	editData: [
 		{
-			key: 'title',
-      label: '标题',
-      type: 'input',
-		}
+			type: 'input',
+			dataIndex: 'imageSrc',
+			title: '图片路径',
+		},
 	],
 }
 
