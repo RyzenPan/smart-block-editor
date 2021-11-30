@@ -16,7 +16,11 @@
 				</div>
 			</div>
 			<div class="config-content">
-				{{currentCompontent.displayName + ': ' + currentCompontent.id}}
+				<FormRender
+					:formCfg="formCfg"
+					:formData="formData"
+					@onChange="handleChangeForm"
+				/>
 			</div>
 		</div>
 		<div
@@ -29,22 +33,38 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref } from 'vue'
+import { computed, onMounted, onUpdated, reactive, ref, watchEffect } from 'vue'
 import { useStore } from 'vuex'
-import { TNewData } from '../../../../store/typing'
+import { TNewData } from '@/store/typing'
 // 导入图标库
-import { CloseOutlined } from "@ant-design/icons-vue";
+import { CloseOutlined } from '@ant-design/icons-vue'
+import FormRender from '@/core/renderer/FormRender.vue'
+import { BasicSchema } from '@/materials/base/schema'
+import _ from 'lodash'
 const store = useStore()
 
 let rightColla = ref(true)
 
-// 当前选中的组件
-const currentCompontent: TNewData | {} = computed(
-	() => store.state.currentCompontent
-)
-
 const handleClosePanel = () => {
 	store.commit('clearCurrPointData')
+}
+// 当前选中的组件
+const currentCompontent: any = computed(() => store.state.currentCompontent)
+
+const formCfg = ref([])
+const formData = ref({})
+
+watchEffect(() => {
+	// console.log(currentCompontent.value, 'type')
+	const { id, type, data } = currentCompontent.value
+	if (id) {
+		formCfg.value = BasicSchema[type].editData
+		formData.value = data
+	}
+})
+
+const handleChangeForm = value => {
+	// console.log(value, 'handleChangeForm')
 }
 </script>
 
