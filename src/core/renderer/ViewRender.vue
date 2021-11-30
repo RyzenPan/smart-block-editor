@@ -37,7 +37,7 @@
 <script lang="ts" setup>
 import DynamicEngine from '@/core/DynamicEngine.vue'
 import _ from 'lodash'
-import { computed, ref } from 'vue'
+import { computed, ref, toRaw } from 'vue'
 import { useStore } from 'vuex'
 import draggable from '../../libs/vuedraggable'
 
@@ -54,7 +54,7 @@ const dragOptions = computed(() => {
 })
 
 // 从VueX中直接取出画板数据
-const pointList = computed(() => store.state.componentArray)
+const pointList = computed(() => toRaw(store.state.componentArray))
 
 // 更新画板数据
 const handleChangeCanvas = () => {
