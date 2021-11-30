@@ -1,18 +1,13 @@
 <template>
 	<div class="ImageRange">
 		<img
-			v-if="!imageSrc"
-			src="https://img.wenhairu.com/images/2021/11/14/1zVhU.jpg"
-			alt=""
-			draggable="false"
-			:style="{ width: '100%' }"
-		/>
-		<img
+			v-if="imageSrc"
 			:src="imageSrc"
 			alt=""
 			draggable="false"
 			:style="{ width: '100%' }"
 		/>
+    <EmptyComp compName="图片组件占位" v-else/>
 	</div>
 </template>
 

@@ -9,11 +9,17 @@ const routes = [
 	{
 		path: '/editor',
 		name: 'Editor',
+		meta: {
+			title: '页面编辑器',
+		},
 		component: Editor,
 	},
 	{
 		path: '/preview',
 		name: 'Preview',
+		meta: {
+			title: '预览',
+		},
 		component: () => import('../pages/Preview/index.vue'),
 	},
 ]
@@ -24,7 +30,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-	document.title = `${to.meta.title || '页面编辑器'} | 智搭`
+	document.title = `${to.meta.title} | 智搭`
 	next()
 })
 
