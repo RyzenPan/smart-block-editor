@@ -28,13 +28,28 @@ export default createStore({
 		// 清除所有画板数据
 		clearPointData(state) {
 			state.componentArray = []
-			localStorage.setItem('ZHIDA_TEMP_DATA', JSON.stringify(state.componentArray))
+			localStorage.setItem(
+				'ZHIDA_TEMP_DATA',
+				JSON.stringify(state.componentArray)
+			)
 		},
 		// 选中当前组件
 		modCurrPointData(state, currentId) {
 			if (!currentId) return
-			const currentItem = state.componentArray.find((i: TNewData) => i.id === currentId)
+			const currentItem = state.componentArray.find(
+				(i: TNewData) => i.id === currentId
+			)
 			state.currentCompontent = currentItem
+		},
+		updateCurrPointData(state, data) {
+			if (!data) return
+			const currentIndex = state.componentArray.findIndex(
+				(i: TNewData) => i.id === state.currentCompontent.id
+			)
+			const componentArray = _.cloneDeep(state.componentArray)
+			componentArray[currentIndex].data = data
+			state.componentArray = componentArray
+			localStorage.setItem('ZHIDA_TEMP_DATA', JSON.stringify(componentArray))
 		},
 		// 清除选中的当前组件
 		clearCurrPointData(state) {

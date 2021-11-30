@@ -25,9 +25,9 @@ const { renderItem } = defineProps({
 	renderItem: Object,
 })
 
-const { imageLists } = renderItem?.data
+const { imageLists = [] } = renderItem?.data
 
-console.log(renderItem, '图片组件收到的')
+// console.log(renderItem, '图片组件收到的')
 </script>
 
 <style lang="less" scope>

@@ -6,10 +6,16 @@ const ImageRange = {
 		...template,
 		id: uuid(6, 10),
 		data: {
-			selectId: 0,
 			imageLists: [],
 		},
 	},
+	editData: [
+		{
+			key: 'title',
+      label: '标题',
+      type: 'input',
+		}
+	],
 }
 
 export default ImageRange
