@@ -38,7 +38,7 @@
   </a-form>
 </template>
 <script lang="ts" setup>
-import { defineProps, reactive, ref, toRaw, watch } from "vue";
+import { reactive, ref, toRaw, watch } from "vue";
 import { useStore } from "vuex";
 const store = useStore();
 

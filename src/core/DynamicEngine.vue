@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts" setup>
-import { defineAsyncComponent, defineProps } from "vue";
+import { defineAsyncComponent } from "vue";
 
 const modules = import.meta.glob("../materials/base/*/index.vue");
 const components: any = {};
