@@ -1,7 +1,7 @@
 <template>
   <div class="Text">
     <p class="title" v-if="title">{{ title }}</p>
-    <p class="plac" v-else>文字组件</p>
+    <EmptyComp compName="文字组件占位" v-else/>
   </div>
 </template>
 
@@ -27,14 +27,5 @@ watch(
   font-size: 20px;
   line-height: 40px;
   text-align: center;
-}
-.plac {
-  width: 100%;
-  height: 100px;
-  line-height: 100px;
-  background-color: #eee;
-  text-align: center;
-  color: #999;
-  border-bottom: 1px solid #ccc;
 }
 </style>

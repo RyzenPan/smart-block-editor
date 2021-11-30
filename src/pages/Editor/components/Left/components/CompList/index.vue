@@ -81,6 +81,7 @@ const cloneComponent = (origin: any) => {
     }
     .dragArea {
       display: flex;
+      cursor: move;
     }
   }
 }
