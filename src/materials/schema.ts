@@ -1,6 +1,6 @@
 import { BasicSchema } from './base/schema';
 
-const schema = {
+const schema: any = {
   ...BasicSchema,
 };
 

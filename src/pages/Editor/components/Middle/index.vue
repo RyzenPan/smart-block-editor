@@ -1,12 +1,13 @@
 <template>
 	<div class="editorPanel">
 		<ViewRender :pointData="componentArray" />
+		<CompControl />
 	</div>
 </template>
 
 <script lang="ts" setup>
 import ViewRender from '../../../../core/renderer/ViewRender.vue'
-import schemaMap from '@/materials/schema'
+import CompControl from './components/CompControl.vue'
 import { useStore } from 'vuex'
 const store = useStore()
 const { componentArray } = store.state

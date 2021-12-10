@@ -1,8 +1,9 @@
 import _ from 'lodash'
 import { createStore } from 'vuex'
 import { TNewData } from './typing'
-import schemaMap from '@/materials/schema'
+import schemaMap from '../materials/schema'
 import { uuid } from '../utlis'
+import { message } from 'ant-design-vue'
 
 const pointDataCache = JSON.parse(
 	localStorage.getItem('ZHIDA_TEMP_DATA') || '[]'
@@ -11,7 +12,7 @@ const pointDataCache = JSON.parse(
 export default createStore({
 	state: {
 		componentArray: pointDataCache,
-		currentCompontent: {},
+		currentCompontent: {} as TNewData | {},
 	},
 	mutations: {
 		// 新增组件
@@ -41,7 +42,7 @@ export default createStore({
 			)
 			state.currentCompontent = currentItem
 		},
-		updateCurrPointData(state, data) {
+		updateCurrPointData(state: any, data) {
 			if (!data) return
 			const currentIndex = state.componentArray.findIndex(
 				(i: TNewData) => i.id === state.currentCompontent.id
@@ -54,6 +55,36 @@ export default createStore({
 		// 清除选中的当前组件
 		clearCurrPointData(state) {
 			state.currentCompontent = {}
+		},
+		copyPointData(state, newItem) {
+			const currentIndex = state.componentArray.findIndex((i: TNewData) => i.id === newItem.id)
+			state.componentArray.splice(currentIndex, 0, { ...newItem, id: uuid(6, 10) });
+			localStorage.setItem('ZHIDA_TEMP_DATA', JSON.stringify(state.componentArray))
+			message.success(`复制成功`);
+		},
+		delPointData(state, id) {
+			const currentIndex = state.componentArray.findIndex((i: TNewData) => i.id === id)
+			state.componentArray.splice(currentIndex, 1)
+			localStorage.setItem('ZHIDA_TEMP_DATA', JSON.stringify(state.componentArray))
+			message.success(`删除成功`);
+		},
+		upDownComp(state, { id, type }) {
+			const currentIndex = state.componentArray.findIndex((i: TNewData) => i.id === id)
+
+			if (type === 'up' && currentIndex > 0) {
+				upDownHandle(state.componentArray, currentIndex, type);
+			} else if (type === 'down' && currentIndex < state.componentArray.length - 1) {
+				upDownHandle(state.componentArray, currentIndex, type);
+			}
+
+			// 处理调整上下组件功能函数
+			function upDownHandle(list: TNewData[], index: number, type: string) {
+				const currItem = list.splice(index, 1);
+				const sourceIndex = type === 'down' ? index + 1 : index - 1;
+				list.splice(sourceIndex, 0, currItem[0]);
+				state.currentCompontent = currItem[0]
+				localStorage.setItem('ZHIDA_TEMP_DATA', JSON.stringify(state.componentArray))
+			}
 		},
 	},
 	actions: {},
