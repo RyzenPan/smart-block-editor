@@ -8,6 +8,7 @@
             <div class="comp-icon">
               <PictureOutlined v-if="element.type === 'ImageRange'" />
               <BoldOutlined v-else-if="element.type === 'Text'" />
+              <block-outlined v-else-if="element.type === 'Swiper'" />
             </div>
             <div class="comp-title">{{ element.displayName }}</div>
           </div>
@@ -20,7 +21,7 @@
 <script lang="ts" setup>
 import schemaMap from "@/materials/schema";
 import basicTemplate from "@/materials/base/template";
-import { PictureOutlined, BoldOutlined } from "@ant-design/icons-vue";
+import { PictureOutlined, BoldOutlined, BlockOutlined } from "@ant-design/icons-vue";
 import { useStore } from "vuex";
 import { TNewData } from "@/store/typing";
 import draggable from "vuedraggable";

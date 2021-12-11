@@ -34,6 +34,9 @@
       <a-form-item :label="formItem.title" v-if="formItem.type === 'colorPicker'">
         <ColorPicker v-model:hexColor="formState[formItem.dataIndex]"/>
       </a-form-item>
+      <a-form-item :label="formItem.title" v-if="formItem.type === 'dynamicInput'">
+        <DynamicInput v-model:valueArray="formState[formItem.dataIndex]"/>
+      </a-form-item>
     </div>
     <a-form-item :wrapper-col="{ span: 16, offset: 5 }" v-if="formCfg.length">
       <a-button type="primary" @click="onSubmit">提交</a-button>
