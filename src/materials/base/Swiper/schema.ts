@@ -7,6 +7,7 @@ const Swiper = {
 		id: uuid(6, 10),
 		data: {
 			imageSrcs: [],
+			isAutoplay: false,
 		},
 	},
 	editData: [
@@ -14,6 +15,11 @@ const Swiper = {
 			type: 'dynamicInput',
 			dataIndex: 'imageSrcs',
 			title: '轮播图片',
+		},
+		{
+			type: 'switch',
+			dataIndex: 'isAutoplay',
+			title: '自动播放',
 		},
 	],
 }
