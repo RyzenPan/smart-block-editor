@@ -7,6 +7,16 @@ const Text = {
 		id: uuid(6, 10),
 		data: {
 			title: '',
+			textColor: '#000',
+			fontSize: '16',
+			textAlign: 'center',
+			lineHeight: '',
+			fontWeight: 'normal',
+			bgColor: '#FFF',
+			bgRadius: 0,
+			space: 0,
+			startTime: '',
+			endTime: ''
 		},
 	},
 	editData: [
