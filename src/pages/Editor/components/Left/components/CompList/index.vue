@@ -9,6 +9,7 @@
               <PictureOutlined v-if="element.type === 'ImageRange'" />
               <BoldOutlined v-else-if="element.type === 'Text'" />
               <block-outlined v-else-if="element.type === 'Swiper'" />
+              <border-outlined v-else-if="element.type === 'Button'" />
             </div>
             <div class="comp-title">{{ element.displayName }}</div>
           </div>
@@ -21,7 +22,7 @@
 <script lang="ts" setup>
 import schemaMap from "@/materials/schema";
 import basicTemplate from "@/materials/base/template";
-import { PictureOutlined, BoldOutlined, BlockOutlined } from "@ant-design/icons-vue";
+import { PictureOutlined, BoldOutlined, BlockOutlined, BorderOutlined } from "@ant-design/icons-vue";
 import { useStore } from "vuex";
 import { TNewData } from "@/store/typing";
 import draggable from "vuedraggable";
@@ -82,6 +83,7 @@ const cloneComponent = (origin: any) => {
     }
     .dragArea {
       display: flex;
+      flex-wrap: wrap;
     }
   }
 }
@@ -90,7 +92,7 @@ const cloneComponent = (origin: any) => {
   box-sizing: border-box;
   width: 82px;
   margin-right: 28px;
-  margin-bottom: 10px;
+  margin-bottom: 28px;
   overflow: hidden;
   background-color: #f6f7f9;
   border-radius: 8px;

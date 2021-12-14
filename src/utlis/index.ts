@@ -71,7 +71,8 @@ export const getCustomStyle = (data: any) => {
         customStyleStr += `border-radius: ${value}px;`;
         break;
       case 'space':
-        customStyleStr += `padding: ${value}px;`;
+        const valueArr = value.split(' ');
+        customStyleStr += valueArr.length >= 2 ? `padding: ${valueArr[0]}px ${valueArr[1]}px;` : `padding: ${valueArr[0]}px;`;
         break;
       default:
         break;
