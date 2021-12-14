@@ -6,6 +6,7 @@
 			alt=""
 			draggable="false"
 			:style="{ width: '100%' }"
+			@click="handleClickImage"
 		/>
     <EmptyComp compName="图片组件占位" v-else/>
 	</div>
@@ -13,19 +14,27 @@
 
 <script lang="ts" setup>
 import { ref, watch } from "vue";
+import { isEditorMode } from "../../../utlis";
 
 const props = defineProps({
 	renderItem: Object,
 })
 
 let imageSrc = ref(props?.renderItem?.data.imageSrc || '');
+let linkUrl = ref(props?.renderItem?.data.linkUrl || '');
 
 watch(
   () => props.renderItem,
   (newVal: any) => {
     imageSrc.value = newVal.data.imageSrc;
+    linkUrl.value = newVal.data.linkUrl;
   }
 );
+
+const handleClickImage = () => {
+	if (isEditorMode()) return;
+	window.location.href = linkUrl.value;
+}
 
 </script>
 

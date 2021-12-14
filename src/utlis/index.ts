@@ -59,7 +59,7 @@ export const getCustomStyle = (data: any) => {
         customStyleStr += `text-align: ${value};`;
         break;
       case 'lineHeight':
-        customStyleStr += `line-height: ${pxTransform(value)}px;`;
+        customStyleStr += value > 0 ? `line-height: ${pxTransform(value)}px;` : '';
         break;
       case 'fontWeight':
         customStyleStr += `font-weight: ${value};`;
