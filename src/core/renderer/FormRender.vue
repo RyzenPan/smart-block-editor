@@ -3,7 +3,7 @@
     <div v-for="(formItem, index) in formCfg" :key="index">
       <!-- 文本输入 -->
       <a-form-item :label="formItem.title" v-if="formItem.type === 'input'">
-        <a-input v-model:value="formState[formItem.dataIndex]" />
+        <a-input :placeholder="formItem.placeholder || `请输入${formItem.title}`" v-model:value="formState[formItem.dataIndex]" />
       </a-form-item>
       <!-- 下拉选择 -->
       <a-form-item :label="formItem.title" v-if="formItem.type === 'select'">
@@ -28,7 +28,7 @@
       <!-- 单选框 -->
       <a-form-item :label="formItem.title" v-if="formItem.type === 'radio'">
         <a-radio-group v-model:value="formState[formItem.dataIndex]">
-          <a-radio v-for="(op) in formItem.options" :value="op[formItem.dataIndex]">{{op[formItem.label]}}</a-radio>
+          <a-radio-button class="radio-item" v-for="(op) in formItem.options" :value="op[formItem.dataIndex]">{{op[formItem.label]}}</a-radio-button>
         </a-radio-group>
       </a-form-item>
       <a-form-item :label="formItem.title" v-if="formItem.type === 'colorPicker'">
@@ -78,3 +78,9 @@ const onSubmit = () => {
   store.commit("updateCurrPointData", toRaw(formState.value));
 };
 </script>
+
+<style lang="less" scoped>
+.radio-item {
+  margin: 0 8px 8px 0;
+}
+</style>
