@@ -32,7 +32,7 @@ watch(
 );
 
 const handleClickImage = () => {
-	if (isEditorMode()) return;
+	if (isEditorMode() || !linkUrl.value) return;
 	window.location.href = linkUrl.value;
 }
 

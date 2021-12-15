@@ -20,6 +20,8 @@ export default createStore({
 			const commonConfig = _.cloneDeep(schemaMap[item.type]?.config)
 			commonConfig.id = uuid(6, 10)
 			state.componentArray.push(commonConfig)
+			localStorage.setItem('ZHIDA_TEMP_DATA', JSON.stringify(state.componentArray))
+			message.success(`新增${commonConfig.displayName}组件成功`);
 		},
 		// 更新画板组件列表
 		setPointData(state, newCompArray) {
@@ -28,46 +30,53 @@ export default createStore({
 		},
 		// 清除所有画板数据
 		clearPointData(state) {
-			state.componentArray = []
+			state.componentArray = [];
 			localStorage.setItem(
 				'ZHIDA_TEMP_DATA',
 				JSON.stringify(state.componentArray)
-			)
+			);
+			state.currentCompontent = {};
+			message.success(`清除成功`);
 		},
 		// 选中当前组件
 		modCurrPointData(state, currentId) {
-			if (!currentId) return
+			if (!currentId) return;
 			const currentItem = state.componentArray.find(
 				(i: TNewData) => i.id === currentId
-			)
-			state.currentCompontent = currentItem
+			);
+			state.currentCompontent = currentItem;
 		},
+		// 更新选中的组件的配置信息
 		updateCurrPointData(state: any, data) {
-			if (!data) return
+			if (!data) return;
 			const currentIndex = state.componentArray.findIndex(
 				(i: TNewData) => i.id === state.currentCompontent.id
-			)
-			const componentArray = _.cloneDeep(state.componentArray)
-			componentArray[currentIndex].data = data
-			state.componentArray = componentArray
-			localStorage.setItem('ZHIDA_TEMP_DATA', JSON.stringify(componentArray))
+			);
+			const componentArray = _.cloneDeep(state.componentArray);
+			componentArray[currentIndex].data = data;
+			state.componentArray = componentArray;
+			localStorage.setItem('ZHIDA_TEMP_DATA', JSON.stringify(componentArray));
 		},
 		// 清除选中的当前组件
 		clearCurrPointData(state) {
-			state.currentCompontent = {}
+			state.currentCompontent = {};
 		},
+		// 复制组件
 		copyPointData(state, newItem) {
-			const currentIndex = state.componentArray.findIndex((i: TNewData) => i.id === newItem.id)
+			const currentIndex = state.componentArray.findIndex((i: TNewData) => i.id === newItem.id);
 			state.componentArray.splice(currentIndex, 0, { ...newItem, id: uuid(6, 10) });
-			localStorage.setItem('ZHIDA_TEMP_DATA', JSON.stringify(state.componentArray))
+			localStorage.setItem('ZHIDA_TEMP_DATA', JSON.stringify(state.componentArray));
 			message.success(`复制成功`);
 		},
+		// 删除组件
 		delPointData(state, id) {
 			const currentIndex = state.componentArray.findIndex((i: TNewData) => i.id === id)
 			state.componentArray.splice(currentIndex, 1)
 			localStorage.setItem('ZHIDA_TEMP_DATA', JSON.stringify(state.componentArray))
+			state.currentCompontent = {}
 			message.success(`删除成功`);
 		},
+		// 调整组件上下顺序
 		upDownComp(state, { id, type }) {
 			const currentIndex = state.componentArray.findIndex((i: TNewData) => i.id === id)
 

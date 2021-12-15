@@ -10,7 +10,7 @@ const Button = {
 			buttonType: 'primary',
 			size: 'middle',
 			linkUrl: '',
-			space: 0
+			space: '0'
 		},
 	},
 	editData: [

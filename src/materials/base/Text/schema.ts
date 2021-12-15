@@ -14,7 +14,7 @@ const Text = {
 			fontWeight: 'normal',
 			bgColor: '#FFF',
 			bgRadius: 0,
-			space: 0,
+			space: '0',
 			startTime: '',
 			endTime: ''
 		},
