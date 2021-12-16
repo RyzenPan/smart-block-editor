@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import { createStore } from 'vuex'
-import { TNewData } from './typing'
+import { TNewData, TPageData } from './typing'
 import schemaMap from '../materials/schema'
 import { uuid } from '../utlis'
 import { message } from 'ant-design-vue'
@@ -13,6 +13,11 @@ export default createStore({
 	state: {
 		componentArray: pointDataCache,
 		currentCompontent: {} as TNewData | {},
+		pageData: {
+			naviBgColor: '#fff',
+			naviBarTextStyle: 'black',
+			title: '标题',
+		} as TPageData | {},
 	},
 	mutations: {
 		// 新增组件

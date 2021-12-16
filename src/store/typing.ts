@@ -4,3 +4,9 @@ export type TNewData = {
   id: string;
   type: string;
 }
+
+export type TPageData = {
+  title: string;
+  naviBarTextStyle: string;
+  naviBgColor: string;
+}

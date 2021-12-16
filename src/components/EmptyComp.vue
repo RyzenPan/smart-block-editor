@@ -14,10 +14,9 @@ const props = defineProps({
   width: 100%;
   height: 100px;
   line-height: 100px;
-  background-color: #eee;
+  background-color: #f0f2f5;
   text-align: center;
   color: #999;
-  border-top: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
   box-sizing: border-box;
 }

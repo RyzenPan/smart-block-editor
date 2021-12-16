@@ -33,9 +33,8 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted, onUpdated, reactive, ref, watchEffect } from 'vue'
+import { computed, ref, watchEffect } from 'vue'
 import { useStore } from 'vuex'
-import { TNewData } from '@/store/typing'
 // 导入图标库
 import { CloseOutlined } from '@ant-design/icons-vue'
 import FormRender from '@/core/renderer/FormRender.vue'
@@ -86,6 +85,9 @@ const handleChangeForm = value => {
 		margin-bottom: 16px;
 		color: #000;
 		font-weight: bold;
+		.left {
+			user-select: none;
+		}
 		.right {
 			color: #767676;
 			cursor: pointer;
