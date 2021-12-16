@@ -21,6 +21,7 @@ export default createStore({
 			commonConfig.id = uuid(6, 10)
 			state.componentArray.push(commonConfig)
 			localStorage.setItem('ZHIDA_TEMP_DATA', JSON.stringify(state.componentArray))
+			state.currentCompontent = commonConfig;
 			message.success(`新增${commonConfig.displayName}组件成功`);
 		},
 		// 更新画板组件列表
