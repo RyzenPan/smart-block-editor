@@ -1,6 +1,6 @@
 <template>
-  <div class="coupon-1" v-for="(item) in couponList" :key="item.couponId">
-    <div class="couponMain" :style="`background-image: url(${couponBgUrl});color: ${themeColor}`">
+  <div class="coupon-1">
+    <div class="couponMain" v-for="(item) in couponList" :key="item.couponId" :style="`background-image: url(${couponBgUrl});color: ${themeColor}`">
       <div class="couponInfo">
         <p class="discountTitle">
           ￥

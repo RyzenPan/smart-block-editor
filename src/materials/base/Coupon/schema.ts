@@ -43,6 +43,11 @@ const Coupon = {
 				},
 			],
 		},
+		{
+			type: 'switch',
+			dataIndex: 'isMock',
+			title: '模拟数据',
+		},
 	],
 }
 
