@@ -29,20 +29,20 @@
 				transition: 'all ease-in-out 0.4s',
 			}"
 		></div>
+		<SettingDrawer />
 	</div>
 </template>
 
 <script lang="ts" setup>
+import _ from 'lodash'
 import { computed, ref, watchEffect } from 'vue'
 import { useStore } from 'vuex'
 // 导入图标库
 import { CloseOutlined } from '@ant-design/icons-vue'
 import FormRender from '@/core/renderer/FormRender.vue'
-import { BasicSchema } from '@/materials/base/schema'
-import _ from 'lodash'
+import { BasicSchema } from '../../../../materials/base/schema'
+import SettingDrawer from './components/SettingDrawer.vue'
 const store = useStore()
-
-let rightColla = ref(true)
 
 const handleClosePanel = () => {
 	store.commit('clearCurrPointData')
@@ -54,7 +54,6 @@ const formCfg = ref([])
 const formData = ref({})
 
 watchEffect(() => {
-	// console.log(currentCompontent.value, 'type')
 	const { id, type, data } = currentCompontent.value
 	if (id) {
 		formCfg.value = BasicSchema[type].editData
@@ -62,8 +61,8 @@ watchEffect(() => {
 	}
 })
 
-const handleChangeForm = value => {
-	// console.log(value, 'handleChangeForm')
+const handleChangeForm = (value: any) => {
+	store.commit("updateCurrPointData", value);
 }
 </script>
 
@@ -92,21 +91,6 @@ const handleChangeForm = value => {
 			color: #767676;
 			cursor: pointer;
 		}
-	}
-}
-.rightcolla {
-	top: 50%;
-	right: 496px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 20px;
-	height: 80px;
-	background: #fff;
-	box-shadow: -2px 0 4px 0 rgba(0, 0, 0, 0.1);
-	cursor: pointer;
-	&:hover {
-		color: #2f54eb;
 	}
 }
 </style>
