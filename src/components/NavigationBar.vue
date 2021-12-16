@@ -1,5 +1,5 @@
 <template>
-  <div :key="uuid(3, 6)" @Click="'handleOpenSetting'" class="navigationBar" :style="`background-color: ${navigationData.naviBgColor}`">
+  <div :key="uuid(3, 6)" @Click="handleOpenSetting" class="navigationBar" :style="`background-color: ${navigationData.naviBgColor}`">
     <img draggable="false" :src="deviceBackgroundUrl" class="deviceBackground" />
     <div class="naviTitle" :style="`color: ${navigationData.naviBarTextStyle === 'black' ? '#000' : '#fff'}`">{{navigationData.title || '标题'}}</div>
   </div>
@@ -8,6 +8,8 @@
 <script lang="ts" setup>
 import { ref, watch } from "vue";
 import { uuid } from "../utlis/index";
+import { useStore } from "vuex";
+const store = useStore();
 
 type TNavigationData = {
   value: {
@@ -32,6 +34,10 @@ watch(
 
 const deviceBackgroundUrl =
   "https://img.wenhairu.com/images/2021/12/16/5DR6d.png";
+
+const handleOpenSetting = () => {
+  store.commit("updateSettingDrawerVisible", true);
+}
 </script>
 
 <style lang="less" scoped>

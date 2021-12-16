@@ -45,19 +45,17 @@
 </template>
 <script lang="ts" setup>
 import { reactive, ref, toRaw, watch } from "vue";
-import { useStore } from "vuex";
-const store = useStore();
 
 const labelCol = ref({ span: 5 });
 const wrapperCol = ref({ span: 16 });
-
-const formState: any = ref({});
-let formCfg: any = reactive([]);
 
 const props: any = defineProps({
   formCfg: Array,
   formData: Object,
 });
+
+const formState: any = ref(props.formData);
+let formCfg: any = reactive(props.formCfg);
 
 watch(
   () => props.formCfg,
@@ -74,8 +72,9 @@ watch(
   }
 );
 
+const emit = defineEmits(["onChange"]);
 const onSubmit = () => {
-  store.commit("updateCurrPointData", toRaw(formState.value));
+  emit('onChange', toRaw(formState.value))
 };
 </script>
 

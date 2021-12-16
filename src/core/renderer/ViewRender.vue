@@ -25,7 +25,7 @@
 <script lang="ts" setup>
 import DynamicEngine from "@/core/DynamicEngine.vue";
 import _ from "lodash";
-import { computed, ref, toRaw } from "vue";
+import { computed, ref } from "vue";
 import { useStore } from "vuex";
 import draggable from "vuedraggable";
 
