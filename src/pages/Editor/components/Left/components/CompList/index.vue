@@ -1,8 +1,11 @@
 <template>
   <div class="compContain">
-    <div class="panelTitle">组件列表</div>
+    <div class="panelTitle upShowAnimation">
+      <span>组件列表</span>
+      <span class="compCount">{{list.length}}</span>
+    </div>
     <div class="penelBox">
-      <draggable class="dragArea list-group" :list="list" :group="{ name: 'Droppable', pull: 'clone', put: false }" item-key="name" :clone="cloneComponent">
+      <draggable class="list-group upShowAnimation" :list="list" :group="{ name: 'Droppable', pull: 'clone', put: false }" item-key="name" :clone="cloneComponent">
         <template #item="{ element, index }">
           <div :className="`module ${(index + 1) % 3 === 0 ? 'mr0' : ''}`" @click="addPoint(element)">
             <div class="comp-icon">
@@ -21,14 +24,20 @@
 </template>
 
 <script lang="ts" setup>
-import schemaMap from "@/materials/schema";
-import basicTemplate from "@/materials/base/template";
-import { PictureOutlined, BoldOutlined, BlockOutlined, BorderOutlined, ScissorOutlined } from "@ant-design/icons-vue";
+import schemaMap from "../../../../../../materials/schema";
+import basicTemplate from "../../../../../../materials/base/template";
+import {
+  PictureOutlined,
+  BoldOutlined,
+  BlockOutlined,
+  BorderOutlined,
+  ScissorOutlined,
+} from "@ant-design/icons-vue";
 import { useStore } from "vuex";
-import { TNewData } from "@/store/typing";
+import { TNewData } from "../../../../../../store/typing";
 import draggable from "vuedraggable";
 import { ref } from "@vue/reactivity";
-import { uuid } from "@/utlis";
+import { uuid } from "../../../../../../utlis";
 import _ from "lodash";
 const store = useStore();
 
@@ -59,6 +68,7 @@ const cloneComponent = (origin: any) => {
   overflow: hidden;
   border-radius: 10px;
   box-shadow: 0 0 6px rgba(152, 153, 161, 0.3);
+  background-color: #fff;
   .panelTitle {
     width: 100%;
     height: 40px;
@@ -72,9 +82,16 @@ const cloneComponent = (origin: any) => {
     -moz-user-select: none;
     -webkit-user-select: none;
     user-select: none;
+    .compCount {
+      padding: 6px 10px;
+      color: #223717;
+      background-color: #2237170D;
+      border-radius: 20px;
+      margin-left: 10px;
+    }
   }
   .penelBox {
-	  height: calc(100vh - 112px);
+    height: calc(100vh - 112px);
     padding: 10px 16px;
     overflow-x: hidden;
     overflow-y: scroll;
@@ -82,7 +99,7 @@ const cloneComponent = (origin: any) => {
     &::-webkit-scrollbar {
       display: none;
     }
-    .dragArea {
+    .list-group {
       display: flex;
       flex-wrap: wrap;
     }
@@ -99,9 +116,12 @@ const cloneComponent = (origin: any) => {
   border-radius: 8px;
   box-shadow: 0 0 6px rgba(152, 153, 161, 0.2);
   user-select: none;
+  transition: all 0.3s;
   cursor: move;
+  
   &:hover {
     background-color: #e9ebed;
+    transform: scale(1.2);
   }
   &::after {
     position: absolute;

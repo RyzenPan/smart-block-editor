@@ -1,11 +1,11 @@
 <template>
 	<div class="header">
-		<div class="logoArea">
+		<div class="logoArea upShowAnimation">
 			<div class="backBtn">
 				<ArrowLeftOutlined />
 			</div>
 		</div>
-		<div class="controlArea">
+		<div class="controlArea upShowAnimation">
 			<SaveOrPubilcBtn />
 		</div>
 	</div>

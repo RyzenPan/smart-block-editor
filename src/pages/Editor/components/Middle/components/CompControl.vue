@@ -1,5 +1,5 @@
 <template>
-  <div class="menuBox">
+  <div class="menuBox upShowAnimation">
     <div class="compMenu">
       <a-tooltip placement="right">
         <template #title>上移：{{ currentCompontent.displayName }}-{{ currentCompontent.id }}组件</template>

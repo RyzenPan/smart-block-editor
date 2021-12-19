@@ -17,7 +17,18 @@ export default defineConfig({
 		},
 	},
 	esbuild: {
-    jsxFactory: 'h',
-    jsxFragment: 'Fragment'
-  }
+		jsxFactory: 'h',
+		jsxFragment: 'Fragment'
+	},
+	css: {
+		preprocessorOptions: {
+			less: {
+				modifyVars: {
+					'primary-color': '#223717',
+					'border-radius-base': '2px',
+				},
+				javascriptEnabled: true,
+			}
+		}
+	}
 })
