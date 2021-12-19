@@ -2,19 +2,18 @@
   <div>
     <HeaderComponent />
     <div class="container">
-        <EditComponentLeft />
-        <EditCompontentMiddle />
-        <EditCompontentRight />
+      <EditComponentLeft />
+      <EditCompontentMiddle />
+      <EditCompontentRight />
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import HeaderComponent from './components/Header/index.vue'
-import EditComponentLeft from './components/Left/index.vue'
-import EditCompontentMiddle from './components/Middle/index.vue'
-import EditCompontentRight from './components/Right/index.vue'
-
+import HeaderComponent from "./components/Header/index.vue";
+import EditComponentLeft from "./components/Left/index.vue";
+import EditCompontentMiddle from "./components/Middle/index.vue";
+import EditCompontentRight from "./components/Right/index.vue";
 </script>
 
 <style lang="less" scoped>

@@ -1,5 +1,5 @@
 <template>
-	<div class="editorPanel">
+	<div class="editorPanel upShowAnimation">
 		<ViewRender :pointData="componentArray" />
 		<CompControl />
 	</div>

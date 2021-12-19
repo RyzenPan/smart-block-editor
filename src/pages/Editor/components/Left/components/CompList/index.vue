@@ -84,8 +84,8 @@ const cloneComponent = (origin: any) => {
     user-select: none;
     .compCount {
       padding: 6px 10px;
-      color: #223717;
-      background-color: #2237170D;
+      color: #65a798;
+      background-color: #65a7980D;
       border-radius: 20px;
       margin-left: 10px;
     }
