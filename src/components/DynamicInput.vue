@@ -43,7 +43,7 @@ const submitForm = () => {
   formRef.value
     .validate()
     .then(() => {
-      const newVal = dynamicValidateForm.domains.map((i) => i.value);
+      const newVal = dynamicValidateForm.domains.map((i: any) => i.value);
       emit("update:valueArray", newVal);
     })
     .catch((error: string) => {

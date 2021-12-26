@@ -1,11 +1,12 @@
 <template>
-	<div class="header">
-		<div class="logoArea upShowAnimation">
+	<div class="header topShowAnimation">
+		<div class="logoArea">
 			<div class="backBtn">
 				<ArrowLeftOutlined />
 			</div>
+			<img class="logo" src="../../../../assets/logo.png" alt="">
 		</div>
-		<div class="controlArea upShowAnimation">
+		<div class="controlArea">
 			<SaveOrPubilcBtn />
 		</div>
 	</div>
@@ -26,7 +27,8 @@ import { ArrowLeftOutlined } from '@ant-design/icons-vue'
 	height: 56px;
 	padding-right: 30px;
 	padding-left: 30px;
-	background: #fff;
+	backdrop-filter: saturate(180%) blur(20px);
+	background-color: rgba(255, 255, 255, 0.85);
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 	.logoArea {
 		position: relative;
@@ -41,10 +43,7 @@ import { ArrowLeftOutlined } from '@ant-design/icons-vue'
 			cursor: pointer;
 		}
 		.logo {
-			width: 100%;
-			img {
-				width: 40px;
-			}
+				width: 120px;
 		}
 		p {
 			position: absolute;

@@ -1,11 +1,11 @@
 <template>
   <div class="compContain">
-    <div class="panelTitle upShowAnimation">
+    <div class="panelTitle">
       <span>组件列表</span>
       <span class="compCount">{{list.length}}</span>
     </div>
     <div class="penelBox">
-      <draggable class="list-group upShowAnimation" :list="list" :group="{ name: 'Droppable', pull: 'clone', put: false }" item-key="name" :clone="cloneComponent">
+      <draggable class="list-group" :list="list" :group="{ name: 'Droppable', pull: 'clone', put: false }" item-key="name" :clone="cloneComponent">
         <template #item="{ element, index }">
           <div :className="`module ${(index + 1) % 3 === 0 ? 'mr0' : ''}`" @click="addPoint(element)">
             <div class="comp-icon">

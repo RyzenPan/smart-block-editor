@@ -11,3 +11,31 @@
     }
   }
 }
+
+.leftShowAnimation {
+  animation: leftShow 0.4s ease-in-out;
+  @keyframes leftShow {
+    0% {
+      opacity: 0;
+      transform: translateX(-350px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+}
+
+.topShowAnimation {
+  animation: topShow 0.4s ease-in-out;
+  @keyframes topShow {
+    0% {
+      opacity: 0;
+      transform: translateY(-56px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}

@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div class="editComponentLeft">
+		<div class="editComponentLeft leftShowAnimation">
 			<div class="penel">
         <CompList />
         <!-- <CompMap /> -->
@@ -24,6 +24,7 @@ import CompList from './components/CompList/index.vue'
   width: 350px;
   max-height: 100vh;
   background-color: #fff;
+  margin-top: 56px;
   .penel {
     width: 100%;
     height: 100%;
