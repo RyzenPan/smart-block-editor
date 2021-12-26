@@ -9,6 +9,26 @@
 import { ref } from "vue";
 import Container from "./Container.vue";
 const loaded = ref(true);
+import { useRoute } from "vue-router";
+import { getPageInfo, getPageJson, initDBStroage } from "../../models/db";
+const route = useRoute();
+import { useStore } from "vuex";
+const store = useStore();
+
+initDBStroage()
+const pageId: any = route?.query?.pageId;
+
+if (pageId) {
+  const pageInfo = getPageInfo({ pageId });
+  console.log(pageInfo, 'pageInfo')
+  const pageJson = getPageJson({ pageUrl: pageInfo.pageUrl });
+  console.log(pageJson, 'pageJson')
+  if (Object.keys(pageJson).length) {
+    store.commit("setPointData", pageJson);
+    store.commit("updatePageData", pageInfo);
+  }
+}
+
 setTimeout(() => {
   loaded.value = false;
 }, 400);
