@@ -14,10 +14,10 @@ function getData(key: string) {
 // 初始化数据库
 export function initDBStroage() {
   if (!localStorage.getItem(DB_NAME_ENUM.PAGE_LIST)) {
-    localStorage.setItem(DB_NAME_ENUM.PAGE_LIST, '[]')
+    localStorage.setItem(DB_NAME_ENUM.PAGE_LIST, '[]');
   }
   if (!localStorage.getItem(DB_NAME_ENUM.CDN)) {
-    localStorage.setItem(DB_NAME_ENUM.CDN, '{}')
+    localStorage.setItem(DB_NAME_ENUM.CDN, '{}');
   }
 }
 
@@ -60,8 +60,7 @@ export function getPageJson({ pageUrl }: TGetPageJsonParams) {
 // 保存页面
 export function savePage({ pageData, pageJson }: TSavePageParams) {
   const pageList = getData(DB_NAME_ENUM.PAGE_LIST) || [];
-  const cdnCos = getData(DB_NAME_ENUM.CDN) || {};    const newPageId = uuid(8, 12);
-
+  const cdnCos = getData(DB_NAME_ENUM.CDN) || {}; const newPageId = uuid(8, 12);
   if (pageData.pageId) {
     const target = pageList.find((item: any) => item.pageId === pageData.pageId) || {};
     if (target) {
@@ -72,11 +71,10 @@ export function savePage({ pageData, pageJson }: TSavePageParams) {
     pageList.push({
       ...pageData,
       pageId: newPageId,
-      pageUrl: newPageUrl
+      saveUrl: newPageUrl
     });
     cdnCos[newPageUrl] = pageJson;
   }
-
   setData(DB_NAME_ENUM.PAGE_LIST, pageList);
   setData(DB_NAME_ENUM.CDN, cdnCos);
 
@@ -99,7 +97,8 @@ export function publishPage({ pageData, pageJson }: TSavePageParams) {
     pageList.push({
       ...pageData,
       pageId: newPageId,
-      pageUrl: newPageUrl
+      publishUrl: newPageUrl,
+      saveUrl: newPageUrl
     });
     cdnCos[newPageUrl] = pageJson;
   }

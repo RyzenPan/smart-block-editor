@@ -20,9 +20,7 @@ const pageId: any = route?.query?.pageId;
 
 if (pageId) {
   const pageInfo = getPageInfo({ pageId });
-  console.log(pageInfo, 'pageInfo')
-  const pageJson = getPageJson({ pageUrl: pageInfo.pageUrl });
-  console.log(pageJson, 'pageJson')
+  const pageJson = getPageJson({ pageUrl: pageInfo.saveUrl });
   if (Object.keys(pageJson).length) {
     store.commit("setPointData", pageJson);
     store.commit("updatePageData", pageInfo);

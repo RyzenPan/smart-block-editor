@@ -10,7 +10,7 @@
 
 <script lang="ts" setup>
 import { toRaw } from "@vue/reactivity";
-import { message, Modal } from "ant-design-vue";
+import { message, Modal, notification } from "ant-design-vue";
 import { useStore } from "vuex";
 import { savePage } from "../../../../../../models/db";
 import { useRouter, useRoute } from "vue-router";
@@ -46,7 +46,10 @@ const handleSave = () => {
       ...pageData,
       pageId: res,
     });
-    message.success("保存成功");
+    notification.success({
+      message: "保存成功",
+      description: "页面文件已保存到CDN库中",
+    });
   }
 };
 </script>
