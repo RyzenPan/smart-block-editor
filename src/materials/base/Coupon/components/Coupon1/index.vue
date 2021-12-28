@@ -1,6 +1,6 @@
 <template>
   <div class="coupon-1">
-    <div class="couponMain" v-for="(item) in couponList" :key="item.couponId" :style="`background-image: url(${couponBgUrl});color: ${themeColor}`">
+    <div class="couponMain" v-for="(item) in props.couponList" :key="item.couponId" :style="`background-image: url(${couponBgUrl});color: ${themeColor}`">
       <div class="couponInfo">
         <p class="discountTitle">
           ￥
@@ -22,20 +22,12 @@
 </template>
 
 <script lang="ts" setup>
-import { watch, ref } from "vue";
+import { ref } from "vue";
 
 const emit= defineEmits(['handleGetCoupon'])
 const props = defineProps({
   couponList: Array,
 });
-const couponList: any = ref(props.couponList || [])
-
-watch(
-  () => props.couponList,
-  (newVal: any) => {
-    couponList.value = newVal;
-  }
-);
 
 const couponBgUrl: string = 'https://img.wenhairu.com/images/2021/12/15/5FfoG.png';
 const themeColor: string = '#ff445e';

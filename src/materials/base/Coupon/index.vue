@@ -50,7 +50,8 @@ watch(
   (newVal: any) => {
     couponData.value = newVal.data;
     if (newVal.data.isMock) {
-      receiveCouponList = [
+      receiveCouponList.length = 0;
+      receiveCouponList.push(...[
         {
           couponName: "测试优惠券1",
           couponId: 19419,
@@ -63,9 +64,9 @@ watch(
           showType: 0,
           amount: 20,
         },
-      ];
+      ]);
     } else {
-      receiveCouponList = [];
+      receiveCouponList.length = 0;
     }
   }
 );
